@@ -10,7 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
-
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 class RegisteredUserController extends Controller
 {
     /**
@@ -39,11 +40,21 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+
+        if (User::count() <= 0) {
+            $role = Role::create(['name' => 'Super Admin']);
+            $permissions = Permission::pluck('id','id')->all();
+            $role->syncPermissions($permissions);
+        }
+
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        $user->assignRole([$role->id]);
 
         event(new Registered($user));
 

@@ -10,31 +10,37 @@
             </div>
             <!-- Hamburger -->
             <div class="-mr-2 hidden sm:flex items-center" id="sidemenutoggle">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="" id="toggleIcon" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 4l-8 8l8 8"/></svg>
+                <button @click="open = ! open"
+                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="" id="toggleIcon" width="1em" height="1em"
+                        preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" d="m15 4l-8 8l8 8" />
+                    </svg>
                 </button>
             </div>
         </div>
     </div>
 </nav>
-<ul>
-    <li class="bg-indigo-100 border-red-400 border-l-4">
-        <a href="" class="flex items-center justify-start gap-4 px-5 py-3">
-            <span class="iconify" data-icon="mingcute:dashboard-2-line"></span>
-            <p class="linktext">Dashboard</p>
-        </a>
-    </li>
-    <li class="hover:bg-indigo-100">
-        <a href="" class="flex items-center justify-start gap-4 px-5 py-3">
-            <span class="iconify" data-icon="ph:users"></span>
-            <p class="linktext">Admins</p>
-        </a>
-    </li>
-    <li class="hover:bg-indigo-100">
-        <a href="" class="flex items-center justify-start gap-4 px-5 py-3">
-            <span class="iconify" data-icon="icon-park-outline:appointment"></span>
-            <p class="linktext">Appointments</p>
-        </a>
-    </li>
-</ul>
-
+<div class="sidenav">
+    <x-sidenav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+        <span class="iconify" data-icon="mingcute:dashboard-2-line"></span>
+        <p class="sidelinktext">Dashboard</p>
+    </x-sidenav-link>
+    <x-sidenav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
+        <span class="iconify" data-icon="ph:users"></span>
+        <p class="sidelinktext">Users</p>
+    </x-sidenav-link>
+    <x-sidenav-link :href="route('permissions.index')" :active="request()->routeIs('permissions.*')">
+        <span class="iconify" data-icon="fluent:key-20-regular"></span>
+        <p class="sidelinktext">Permissions</p>
+    </x-sidenav-link>
+    <x-sidenav-link :href="route('roles.index')" :active="request()->routeIs('roles.*')">
+        <span class="iconify" data-icon="fluent:phone-key-24-regular"></span>
+        <p class="sidelinktext">Roles</p>
+    </x-sidenav-link>
+    <x-sidenav-link :href="route('appoinments.index')" :active="request()->routeIs('appoinments.*')">
+        <span class="iconify" data-icon="icon-park-outline:appointment"></span>
+        <p class="sidelinktext">Appointments</p>
+    </x-sidenav-link>
+</div>
